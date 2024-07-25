@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row m-2">
+        <h2 class="text-muted text-center col-12">Login</h2>
+    </div>
+    <div class="container border border-1 p-5 rounded-3 shadow">
+        <form method="POST" action="{{ url_for('login') }}">
+            {{ form.hidden_tag() }}
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="col-auto">
+                    {{ form.username.label(class='form-label') }}
+                </div>
+                <div class="col-auto">
+                    {{ form.username(size=32, class='form-control') }}
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mt-3">
+                <div class="col-auto">
+                    {{ form.password.label(class='form-label') }}
+                </div>
+                <div class="col-auto">
+                    {{ form.password(size=32, class='form-control') }}
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="col-auto">
+                    {{ form.submit(class='btn btn-success') }}
+                </div>
+            </div>
+        </form>
+        <div class="row d-flex justify-content-between">
+            <div class="col-auto">
+                <small class="col-auto text-muted">Not a Registered user? <a href="{{ url_for('register') }}">Register</a></small>
+            </div>
+            <div class="col-auto">
+                <small class="col-auto text-muted">Forgot username, password? <a href="{{ url_for('reset') }}">Reset</a></small>
+            </div>
+        </div>
+    </div>
+{% endblock %}

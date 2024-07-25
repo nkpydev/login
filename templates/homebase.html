@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body class="container-fluid bg-body">
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</li>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+    </div>
+    <div class="container-fluid border border-danger min-vh-100 d-flex flex-column">
+        <div class="row vh-100">
+            <div class="col-sm-2 small sticky-top vh-100 shadow">
+                <div class="d-flex flex-sm-column flex-row flex-nowrap align-items-center sticky-top">
+                    <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+                        <p class="fw-bold fs-3">NkFlix</p>
+                    </a>
+                    <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
+                        <li>
+                            <div class="col-auto">
+                                <a href="{{ url_for('recommended') }}" class="nav-link py-3 px-2 " title="Recommended" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Recommended">
+                                    <span class="fw-bold">Recommended</span>
+                                </a>
+                            </div>                            
+                        </li>
+                        <li class="nav_logos">
+                            <a href="{{ url_for('hollywood') }}" class="nav-link py-3 px-2" title="Hollywood" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Hollywood">
+                                <span class="fw-bold">Hollywood</span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav_logos">
+                            <a href="{{ url_for('bollywood') }}" class="nav-link py-3 px-2" title="Bollywood" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Bollywood">
+                                <span class="fw-bold">Bollywood</span>
+                            </a>
+                        </li>
+                        <li class="nav_logos">
+                            <a href="{{ url_for('setprofile') }}" class="nav-link py-3 px-2" title="SetProfile" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="SetProfile">
+                                <span class="fw-bold">Set Profile</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-9 small sticky-top nav-blue">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

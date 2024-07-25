@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row m-2">
+        <h2 class="col-12 text-center text-muted">Register</h2>
+    </div>
+    <div class="container border border-1 p-5 rounded-3 shadow">
+        <form method="POST" action="{{ url_for('register') }}" class="row g-3">
+            {{ form.hidden_tag() }}
+            <div class="col-md-6">
+                {{ form.firstname.label(class='form-label') }}
+                {{ form.firstname(size=32, class='form-control') }}
+            </div>
+            <div class="col-md-6">
+                {{ form.lastname.label(class='form-label') }}
+                {{ form.lastname(size=32, class='form-control') }}
+            </div>
+            <div class="col-md-6">
+                {{ form.emailid.label(class='form-label') }}
+                {{ form.emailid(size=32, class='form-control') }}
+            </div>
+            <div class="col-md-6">
+                {{ form.username.label(class='form-label') }}
+                {{ form.username(size=32, class='form-control') }}
+            </div>
+            <div class="col-md-6">
+                {{ form.password.label(class='form-label') }}
+                {{ form.password(size=32, class='form-control') }}
+            </div>
+            <div class="col-md-6">
+                {{ form.confirmpassword.label(class='form-label') }}
+                {{ form.confirmpassword(size=32, class='form-control') }}
+            </div>
+            <div class="row d-flex justify-content-center mt-5">
+                <div class="col-auto">
+                    {{ form.submit(class='btn btn-info') }}
+                </div>
+            </div>
+        </form>
+        <div class="row d-flex justify-content-between">
+            <div class="col-auto">
+                <small class="col-auto text-muted">Already Registered user? <a href="{{ url_for('login') }}">Login</a></small>
+            </div>
+        </div>
+    </div>
+{% endblock %}
