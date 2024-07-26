@@ -1,6 +1,6 @@
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from forms import LoginForm, RegisterForm, ResetForm, SetProfileForm
+from forms import LoginForm, RegisterForm, ResetForm, SetPreferencesForm
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -29,6 +29,10 @@ class User(UserMixin, db.Model):
     emailid = db.Column(db.String(150), nullable=False)
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
+    bollywood_preference = db.Column(db.Boolean, default=False)
+    hollywood_preference = db.Column(db.Boolean, default=False)
+    videosongs_preference = db.Column(db.Boolean, default=False)
+    adultcontent_preference = db.Column(db.Boolean, default=False)
 
 def send_email(to_email_id, process):
     print(f"Sent link to {to_email_id}, for resetting {process}")
@@ -74,7 +78,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and check_password_hash(user.password, form.password.data):
             login_user(user)
-            return redirect(url_for('setprofile'))
+            return redirect(url_for('setpreference'))
         else:
             flash('Invalid credentials', 'danger')
     return render_template('login.html', form=form)
@@ -91,12 +95,25 @@ def bollywood():
 def hollywood():
     return "Hollywood Movies/Series."
 
-@app.route("/setprofile", methods=["GET", "POST"])
-def setprofile():
-    form = SetProfileForm()
+@app.route("/setpreference", methods=["GET", "POST"])
+@login_required
+def setpreference():
+    form = SetPreferencesForm()
     if form.validate_on_submit():
-        pass
-    return render_template('setprofile.html', form=form)
+        print("Here")
+        current_user.bollywood_preference = form.preferred_category_1.data
+        current_user.hollywood_preference = form.preferred_category_2.data
+        current_user.videosongs_preference = form.preferred_category_3.data
+        current_user.adultcontent_preference = form.adultpreference.data
+        db.session.commit()
+        flash("Your preferences are now set!", "success")
+        return redirect(url_for('recommended'))
+    if request.method == "GET":
+        form.preferred_category_1.data = current_user.bollywood_preference
+        form.preferred_category_2.data = current_user.hollywood_preference
+        form.preferred_category_3.data = current_user.videosongs_preference
+        form.adultpreference.data = current_user.adultcontent_preference
+    return render_template('setpreference.html', form=form)
 
 @app.route('/logout')
 @login_required

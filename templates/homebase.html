@@ -17,7 +17,7 @@
           {% endif %}
         {% endwith %}
     </div>
-    <div class="container-fluid border border-danger min-vh-100 d-flex flex-column">
+    <div class="container-fluid min-vh-100 d-flex flex-column">
         <div class="row vh-100">
             <div class="col-sm-2 small sticky-top vh-100 shadow">
                 <div class="d-flex flex-sm-column flex-row flex-nowrap align-items-center sticky-top">
@@ -44,11 +44,14 @@
                             </a>
                         </li>
                         <li class="nav_logos">
-                            <a href="{{ url_for('setprofile') }}" class="nav-link py-3 px-2" title="SetProfile" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="SetProfile">
-                                <span class="fw-bold">Set Profile</span>
+                            <a href="{{ url_for('setpreference') }}" class="nav-link py-3 px-2" title="SetPreference" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="SetPreference">
+                                <span class="fw-bold">Set Preference</span>
                             </a>
                         </li>
                     </ul>
+                    <a href="{{ url_for('logout') }}" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+                        <p class="fw-bold">Log Out</p>
+                    </a>
                 </div>
             </div>
             <div class="col-sm-9 small sticky-top nav-blue">

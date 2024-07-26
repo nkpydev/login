@@ -1,0 +1,28 @@
+{% extends 'homebase.html' %}
+{% block content %}
+    <div class="container">
+        <h2 class="text-center text-muted">Preferences</h2>
+        <form action="{{ url_for('setpreference') }}" method="post" class="row d-flex flex-column justify-content-center">
+            {{ form.hidden_tag() }}
+            <div class="col-12 mt-5">
+                <p class="row fs-5 text-primary">
+                    Preferred Categories
+                </p>
+                <div class="form-check m-2">{{ form.preferred_category_1(class='form-check-input') }} {{ form.preferred_category_1.label(class='form-check-label') }}</div>
+                <div class="form-check m-2">{{ form.preferred_category_2(class='form-check-input') }} {{ form.preferred_category_2.label(class='form-check-label') }}</div>
+                <div class="form-check m-2">{{ form.preferred_category_3(class='form-check-input') }} {{ form.preferred_category_3.label(class='form-check-label') }}</div>
+            </div>
+            <div class="col-12 mt-5">
+                <p class="row fs-5 text-primary">
+                    Adult Content Preference
+                </p>
+                <div class="form-check">
+                        {{ form.adultpreference(class='form-check-input') }} {{ form.adultpreference.label(class='form-check-label') }}
+                </div>
+            </div>
+            <div class="row mt-5">
+                {{ form.submit(class='btn btn-primary col-auto') }}
+            </div>
+        </form>
+    </div>
+{% endblock %}

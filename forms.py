@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, EmailField, RadioField, SelectMultipleField
+from wtforms import StringField, PasswordField, SubmitField, EmailField, RadioField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo
 
 class LoginForm(FlaskForm):
@@ -22,6 +22,9 @@ class ResetForm(FlaskForm):
     password = PasswordField('Password')
     submit = SubmitField('Reset')
 
-class SetProfileForm(FlaskForm):
-    prefferedcategory = SelectMultipleField('Categories', choices=[('Bollywood', 'Bollywood'), ('Hollywood', 'Hollywood'), ('Video Songs', 'Video Songs')], validators=[DataRequired()])
-    adultpreference = RadioField('Show Adult Content', choices=[('1', 'Yes'), ('0', 'No')], validators=[DataRequired()], default=0, coerce=int)
+class SetPreferencesForm(FlaskForm):
+    preferred_category_1 = BooleanField('Bollywood')
+    preferred_category_2 = BooleanField('Hollywood')
+    preferred_category_3 = BooleanField('Video Songs')
+    adultpreference = BooleanField('Adult Content')
+    submit = SubmitField('Set Preferences')
