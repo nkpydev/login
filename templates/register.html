@@ -6,7 +6,7 @@
     </div>
     <div class="container border border-1 p-5 rounded-3 shadow">
         <form method="POST" action="{{ url_for('register') }}" class="row g-3">
-            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
             <div class="col-md-6">
                 {{ form.firstname.label(class='form-label') }}
                 {{ form.firstname(size=32, class='form-control') }}

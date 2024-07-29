@@ -3,6 +3,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from forms import LoginForm, RegisterForm, ResetForm, SetPreferencesForm
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 app.secret_key = '4ccd46d98428a274bc1dc507766c76a7'
@@ -17,10 +18,7 @@ login_manager.login_view = 'login'
 login_manager.login_message = "User needs to be logged in to view this page"
 login_manager.login_message_category = "warning"
 
-# In-memory user store for example
-users = {'admin': {'password': 'secret', 'firstname': 'admin', 'lastname': 'admin', 'emailid': 'admin@admin.com'}}
-
-
+csrf = CSRFProtect(app)
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -84,14 +82,17 @@ def login():
     return render_template('login.html', form=form)
 
 @app.route("/recommended")
+@login_required
 def recommended():
     return "Recommended Movies/Series as per set profile."
 
 @app.route("/bollywood")
+@login_required
 def bollywood():
     return render_template('bollywood.html')
 
 @app.route("/hollywood")
+@login_required
 def hollywood():
     return "Hollywood Movies/Series."
 

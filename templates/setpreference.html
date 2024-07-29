@@ -3,7 +3,7 @@
     <div class="container">
         <h2 class="text-center text-muted">Preferences</h2>
         <form action="{{ url_for('setpreference') }}" method="post" class="row d-flex flex-column justify-content-center">
-            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
             <div class="col-12 mt-5">
                 <p class="row fs-5 text-primary">
                     Preferred Categories
