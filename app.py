@@ -8,7 +8,7 @@ from flask_wtf.csrf import CSRFProtect
 app = Flask(__name__)
 app.secret_key = '4ccd46d98428a274bc1dc507766c76a7'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://newdeveloper:NKdevopsProjectWorks#3686@localhost/project1'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://newdeveloper:newdeveloperpwd@localhost/project1'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
